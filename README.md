@@ -15,42 +15,59 @@ Inspired by [Karpathy's autoresearch](https://github.com/karpathy/autoresearch) 
 
 ## Installation
 
-### Option A: Install as a Claude Code Plugin (Recommended)
+### Option A: Load as a Local Plugin (Recommended)
 
 ```bash
-# Install the plugin from the .plugin file
-claude plugin install sdlc-scaffold.plugin
+# Extract the plugin archive
+unzip sdlc-scaffold.plugin -d sdlc-scaffold
 
-# Initialize in any project
-cd your-project
-claude /init
+# Launch Claude Code with the plugin loaded
+claude --plugin-dir ./sdlc-scaffold
+
+# Initialize in your project
+/init
 ```
 
-### Option B: Copy the .claude/ directory manually
+To load the plugin automatically for every session, add it to your Claude Code settings:
 
 ```bash
-cp -r scaffold/.claude/ your-project/.claude/
-cp scaffold/CLAUDE.md your-project/CLAUDE.md
+# From your project directory
+claude settings set pluginDirs '["./sdlc-scaffold"]'
+```
+
+### Option B: Copy the .claude/ Directory Manually
+
+```bash
+# Clone this repo and copy the scaffold into your project
+git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
+cp -r claude_code_forge_v2/.claude/ your-project/.claude/
+cp claude_code_forge_v2/CLAUDE.md your-project/CLAUDE.md
+```
+
+### Option C: Use This Repo Directly
+
+```bash
+git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
+cd claude_code_forge_v2
+claude
+# The scaffold is already active via .claude/ and CLAUDE.md
 ```
 
 ## Quick Start
 
 ```bash
-# 1. Install the plugin (Option A above) or copy files (Option B)
+# 1. Set up using any installation option above
 
-# 2. Initialize the scaffold in your project
-claude /init
+# 2. Write a Business Requirements Document (plain text or markdown)
 
-# 3. Write a Business Requirements Document (plain text or markdown)
-
-# 4. Run the full pipeline
-claude /build docs/my-brd.md
+# 3. Run the full pipeline
+/build docs/my-brd.md
 
 # Or run phases individually:
-claude /spec docs/my-brd.md    # Decompose BRD into epics and stories
-claude /design                  # Generate architecture + UI mockups
+/spec docs/my-brd.md    # Decompose BRD into epics and stories
+/design                  # Generate architecture + UI mockups
 # ← Review and approve specs + design here
-claude /auto                    # Autonomous loop builds everything
+/auto                    # Autonomous loop builds everything
 ```
 
 ## How It Works
