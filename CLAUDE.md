@@ -71,6 +71,7 @@ All pipeline commands are **skills** (in `.claude/skills/`), not slash commands.
 Run the complete pipeline with `/build [BRD]` or individual phases:
 
 ```
+/brd              → Create BRD via Socratic interview           (agent: brd-creator)
 /spec [BRD]       → Epics, user stories, dependency graph     (agent: spec-writer)
 /design           → System architecture + UI mockups           (agents: architect + ui-designer)
 /implement        → Code generation with agent teams           (agent: implementer)
@@ -84,19 +85,20 @@ Run the complete pipeline with `/build [BRD]` or individual phases:
 /auto             → Autonomous ratcheting loop (post-approval)
 ```
 
-Pipeline flow: **BRD → Spec → Architecture + UI → Code → Review → Tests → Deploy**
+Pipeline flow: **BRD (Socratic interview) → Spec → Architecture + UI → Code → Review → Tests → Deploy**
 
 ### Skill Architecture
 
 Skills fall into two categories:
 
-- **Task skills** — runnable via `/command`, bound to agents: `spec`, `design`, `implement`, `review`, `test`, `deploy`, `build`, `fix-issue`, `refactor`, `improve`, `auto`
+- **Task skills** — runnable via `/command`, bound to agents: `brd`, `spec`, `design`, `implement`, `review`, `test`, `deploy`, `build`, `fix-issue`, `refactor`, `improve`, `auto`
 - **Reference skills** — read by agents for domain knowledge: `code-gen`, `spec-writing`, `architecture`, `ui-mockup`, `testing`, `deployment`
 
 ### Subagents
 
 | Agent | Role | Output |
 |-------|------|--------|
+| brd-creator | Socratic interview → app spec + feature specs | `specs/` |
 | spec-writer | BRD → epics + stories | `.claude/specs/` |
 | architect | System design, APIs, data models, deployment | `.claude/architecture/` |
 | ui-designer | Interactive HTML/React mockups | `.claude/design/` |
@@ -190,6 +192,7 @@ The scaffold improves over time through three mechanisms:
 ## Deep Dives
 
 ### Task Skills (runnable via `/command`)
+- @.claude/skills/brd/SKILL.md — create BRD via Socratic interview
 - @.claude/skills/build/SKILL.md — full 8-phase SDLC pipeline
 - @.claude/skills/spec/SKILL.md — BRD → epics, stories, dependency graph
 - @.claude/skills/design/SKILL.md — architecture + UI mockups (concurrent agents)
