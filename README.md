@@ -15,52 +15,34 @@ Inspired by [Karpathy's autoresearch](https://github.com/karpathy/autoresearch) 
 
 ## Installation
 
-### Option A: Load as a Local Plugin (Recommended)
+### Option A: Copy into Your Project
 
 ```bash
-# Extract the plugin archive
-unzip sdlc-scaffold.plugin -d sdlc-scaffold
-
-# Launch Claude Code with the plugin loaded
-claude --plugin-dir ./sdlc-scaffold
-
-# Initialize in your project
-/init
-```
-
-To load the plugin automatically for every session, add it to your Claude Code settings:
-
-```bash
-# From your project directory
-claude settings set pluginDirs '["./sdlc-scaffold"]'
-```
-
-### Option B: Copy the .claude/ Directory Manually
-
-```bash
-# Clone this repo and copy the scaffold into your project
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
 cp -r claude_code_forge_v2/.claude/ your-project/.claude/
 cp claude_code_forge_v2/CLAUDE.md your-project/CLAUDE.md
+cd your-project
+claude
 ```
 
-### Option C: Use This Repo Directly
+Claude Code automatically loads `.claude/` and `CLAUDE.md` on startup. All commands, agents, hooks, and skills are immediately available.
+
+### Option B: Use This Repo Directly
 
 ```bash
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
 cd claude_code_forge_v2
 claude
-# The scaffold is already active via .claude/ and CLAUDE.md
 ```
+
+The scaffold is already active — start writing your BRD and run `/build`.
 
 ## Quick Start
 
 ```bash
-# 1. Set up using any installation option above
+# 1. Write a Business Requirements Document (plain text or markdown)
 
-# 2. Write a Business Requirements Document (plain text or markdown)
-
-# 3. Run the full pipeline
+# 2. Run the full pipeline
 /build docs/my-brd.md
 
 # Or run phases individually:
@@ -259,7 +241,7 @@ Templates for Docker Compose are included in `.claude/skills/deployment/template
 - `.env.example` — All required/optional environment variables
 
 ```bash
-claude /deploy --up    # Generate deployment files + start the stack
+/deploy --up    # Generate deployment files + start the stack
 ```
 
 ## E2E Testing with Playwright
@@ -267,8 +249,8 @@ claude /deploy --up    # Generate deployment files + start the stack
 A Playwright config template is included at `.claude/skills/testing/templates/playwright.config.ts`. It auto-starts Docker Compose via `webServer` and runs Chromium tests against the full stack.
 
 ```bash
-claude /test           # Generate test plan + cases + Playwright E2E
-claude /test --e2e-only # Just Playwright tests
+/test           # Generate test plan + cases + Playwright E2E
+/test --e2e-only # Just Playwright tests
 ```
 
 ## Adapting for Your Project
