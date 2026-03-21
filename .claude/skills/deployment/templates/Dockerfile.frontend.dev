@@ -1,0 +1,24 @@
+# Frontend Development Dockerfile — Node 20 + Vite + hot reload
+# Used by docker-compose.yml: frontend service
+
+FROM node:20-slim
+
+WORKDIR /app
+
+# Copy dependency files first (cache layer)
+COPY package.json package-lock.json* ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code (will be overridden by volume mount in dev)
+COPY . .
+
+# Health check — Vite dev server
+HEALTHCHECK --interval=10s --timeout=5s --retries=3 \
+    CMD node -e "const http = require('http'); http.get('http://localhost:3000', (r) => r.statusCode === 200 ? process.exit(0) : process.exit(1)).on('error', () => process.exit(1))" || exit 1
+
+EXPOSE 3000
+
+# Dev server with hot reload (overridden in docker-compose.yml command)
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

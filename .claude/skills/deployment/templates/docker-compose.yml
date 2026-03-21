@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/src:/app/src          # hot reload for development
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy      # wait for database to be healthy
+    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - PYTHONUNBUFFERED=1              # unbuffered output for logs
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src         # hot reload for development
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    command: npm run dev -- --host 0.0.0.0
+
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: app_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dev             # use .env in production, not hardcoded
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # persistent data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5                         # wait up to 25 seconds for postgres to be ready
+
+volumes:
+  pgdata:                                # named volume for database persistence

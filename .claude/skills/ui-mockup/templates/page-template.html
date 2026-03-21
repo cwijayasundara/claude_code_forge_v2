@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Screen Name] — Mockup</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Mock data — realistic, not lorem ipsum
+    const MOCK_DATA = {
+      orders: [
+        {
+          id: '1',
+          orderId: 'ORD-2026-0001',
+          status: 'completed',
+          createdAt: '2026-03-20T14:32:00Z',
+          customerName: 'Sarah Chen',
+          totalAmount: '$2,500.50',
+        },
+        {
+          id: '2',
+          orderId: 'ORD-2026-0002',
+          status: 'processing',
+          createdAt: '2026-03-21T09:15:00Z',
+          customerName: 'Michael Rodriguez',
+          totalAmount: '$1,200.00',
+        },
+      ],
+      user: {
+        name: 'Alex Thompson',
+        email: 'alex.thompson@acmecorp.com',
+        role: 'Order Manager',
+      },
+    };
+
+    function App() {
+      const [orders, setOrders] = useState(MOCK_DATA.orders);
+      const [submitting, setSubmitting] = useState(false);
+      const [error, setError] = useState(null);
+
+      const handleCreateOrder = async () => {
+        setError(null);
+        setSubmitting(true);
+        // Simulate submission delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        setSubmitting(false);
+        // In a real app, add the new order to the list
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-50">
+          {/* Header */}
+          <header className="bg-white border-b border-gray-200 shadow-sm">
+            <div className="max-w-7xl mx-auto px-6 py-4">
+              <div className="flex items-center justify-between">
+                <h1 className="text-2xl font-bold text-gray-900">Order Management</h1>
+                <div className="text-sm text-gray-600">
+                  {MOCK_DATA.user.name} — {MOCK_DATA.user.role}
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="max-w-7xl mx-auto px-6 py-8">
+            {/* Create Order Section */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-8">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Create Order</h2>
+
+              {error && (
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-sm text-red-700">{error}</p>
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Customer Name"
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+                <input
+                  type="number"
+                  placeholder="Total Amount"
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+                <button
+                  onClick={handleCreateOrder}
+                  disabled={submitting}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:bg-gray-400"
+                >
+                  {submitting ? 'Creating...' : 'Create Order'}
+                </button>
+                {submitting && (
+                  <div className="mt-4">
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-600 animate-pulse"></div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">Processing order...</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Orders List */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Orders</h2>
+
+              {orders.length === 0 ? (
+                <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+                  <p className="text-gray-500">No orders yet</p>
+                </div>
+              ) : (
+                <div className="grid gap-4">
+                  {orders.map(order => (
+                    <div key={order.id} className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h3 className="font-medium text-gray-900">{order.orderId}</h3>
+                          <p className="text-sm text-gray-500 mt-1">
+                            {order.customerName} — {new Date(order.createdAt).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-medium text-gray-900">{order.totalAmount}</p>
+                          <span
+                            className={`inline-block mt-2 px-3 py-1 text-xs font-medium rounded-full ${
+                              order.status === 'completed'
+                                ? 'bg-green-100 text-green-800'
+                                : order.status === 'processing'
+                                ? 'bg-amber-100 text-amber-800'
+                                : 'bg-red-100 text-red-800'
+                            }`}
+                          >
+                            {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </main>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
