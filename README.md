@@ -15,19 +15,44 @@ Inspired by [Karpathy's autoresearch](https://github.com/karpathy/autoresearch) 
 
 ## Installation
 
-### Option A: Copy into Your Project
+### Option A: Local Plugin (Recommended)
+
+Clone the forge once, use it across all your projects:
+
+```bash
+# 1. Clone the forge (once, shared across projects)
+git clone https://github.com/cwijayasundara/claude_code_forge_v2.git ~/claude-code-forge
+
+# 2. Create your project
+mkdir my-project && cd my-project
+git init
+
+# 3. Load the forge as a plugin
+claude --plugin-dir ~/claude-code-forge/.claude
+
+# 4. Inside the Claude session, scaffold your project
+> /claude-code-forge:scaffold
+
+# 5. Exit and restart without --plugin-dir
+> /exit
+claude
+```
+
+After scaffolding, the project is **self-contained** — all agents, skills, hooks, and templates live in the project's `.claude/` directory. Team members just run `claude` in the project root.
+
+### Option B: Manual Copy
 
 ```bash
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
 cp -r claude_code_forge_v2/.claude/ your-project/.claude/
 cp claude_code_forge_v2/CLAUDE.md your-project/CLAUDE.md
+cp claude_code_forge_v2/design.md your-project/design.md
 cd your-project
+mkdir -p specs/{brd/features,stories,design/mockups,test_artefacts,reviews,state}
 claude
 ```
 
-Claude Code automatically loads `.claude/` and `CLAUDE.md` on startup. All commands, agents, hooks, and skills are immediately available.
-
-### Option B: Use This Repo Directly
+### Option C: Use This Repo Directly
 
 ```bash
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git

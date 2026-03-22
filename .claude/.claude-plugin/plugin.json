@@ -1,0 +1,9 @@
+{
+  "name": "claude-code-forge",
+  "version": "2.0.0",
+  "description": "Full SDLC scaffold with 8-agent pipeline, Karpathy ratcheting loop, self-healing, and failure-driven learning for autonomous software development",
+  "author": {
+    "name": "claude-code-forge"
+  },
+  "homepage": "https://github.com/cwijayasundara/claude_code_forge_v2"
+}
