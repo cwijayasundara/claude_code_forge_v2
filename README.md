@@ -96,6 +96,8 @@ claude --plugin-dir ~/claude-code-forge/.claude
 
 The scaffold command will overwrite agents, skills, hooks, and templates but will **not** touch your `specs/` output files, source code, or state files.
 
+**Note:** The plugin-only files (`.claude-plugin/plugin.json` and `commands/scaffold.md`) are never copied to your project — they only exist in the forge repo to enable the `--plugin-dir` mechanism.
+
 ### Alternative: Manual Copy (No Plugin)
 
 If you prefer not to use the plugin mechanism:
@@ -167,7 +169,7 @@ The scaffold has three operating modes:
 
 | Command | What it does | Agent(s) |
 |---------|-------------|----------|
-| `/brd` | Create BRD via Socratic interview | `specs/brd/` |
+| `/brd` | Create BRD via Socratic interview | brd-creator |
 | `/spec [BRD]` | Decompose BRD into epics, stories, dependency graph | spec-writer |
 | `/design` | System architecture + interactive UI mockups | architect + ui-designer |
 | `/implement` | Code generation with parallel agent teams | implementer |
@@ -197,6 +199,7 @@ Project-specific architecture (API contracts, data models, folder structure) is 
 ```
 .claude/
 ├── agents/                    # 8 agent definitions (lean prompts, ~25 lines each)
+│   ├── brd-creator.md
 │   ├── spec-writer.md
 │   ├── architect.md
 │   ├── ui-designer.md
