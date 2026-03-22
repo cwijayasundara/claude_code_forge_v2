@@ -26,28 +26,27 @@ echo "Forge source: $FORGE_ROOT/.claude/"
 ### 2. Copy the scaffold into the current project
 
 ```bash
-# Create target .claude/ directory
-mkdir -p .claude
+# Create target directory structure first (ensures cp -r copies correctly)
+mkdir -p .claude/agents .claude/skills .claude/hooks .claude/evals .claude/state
 
-# Copy agents
-cp -r "$FORGE_ROOT/.claude/agents" .claude/
+# Copy agents (8 agent definitions)
+cp "$FORGE_ROOT/.claude/agents/"*.md .claude/agents/
 
 # Copy skills (all 18 skills with templates and references)
-cp -r "$FORGE_ROOT/.claude/skills" .claude/
+cp -r "$FORGE_ROOT/.claude/skills/"* .claude/skills/
 
 # Copy hooks (11 enforcement hooks)
-cp -r "$FORGE_ROOT/.claude/hooks" .claude/
+cp "$FORGE_ROOT/.claude/hooks/"*.js .claude/hooks/
 
 # Copy evals (code reviewer validation samples)
-cp -r "$FORGE_ROOT/.claude/evals" .claude/
+cp -r "$FORGE_ROOT/.claude/evals/"* .claude/evals/
 
 # Copy configuration
 cp "$FORGE_ROOT/.claude/settings.json" .claude/
 cp "$FORGE_ROOT/.claude/architecture.md" .claude/
 cp "$FORGE_ROOT/.claude/program.md" .claude/
 
-# Initialize state directory
-mkdir -p .claude/state
+# Initialize state files
 echo "0" > .claude/state/coverage-baseline.txt
 touch .claude/state/iteration-log.md
 touch .claude/state/learned-rules.md
