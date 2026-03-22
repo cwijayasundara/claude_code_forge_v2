@@ -98,7 +98,7 @@ Skills fall into two categories:
 
 | Agent | Role | Output |
 |-------|------|--------|
-| brd-creator | Socratic interview → app spec + feature specs | `specs/` |
+| brd-creator | Socratic interview → app spec + feature specs | `specs/brd/` |
 | spec-writer | BRD → epics + stories | `.claude/specs/` |
 | architect | System design, APIs, data models, deployment | `.claude/architecture/` |
 | ui-designer | Interactive HTML/React mockups | `.claude/design/` |

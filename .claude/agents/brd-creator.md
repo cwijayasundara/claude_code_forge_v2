@@ -105,14 +105,14 @@ Present the assessment: "This looks like a [size] project with ~[N] feature grou
 3. Include a **Terminology** table for domain-specific terms.
 4. Include an **Assumptions Register** — every assumption made during the interview, marked as confirmed or pending.
 5. Present the draft to the human for approval section by section.
-6. Write the approved app spec to `specs/app_spec.md`.
+6. Write the approved app spec to `specs/brd/app_spec.md`.
 
 ### A4. Decompose into Feature Specs
 
 After the app spec is approved:
 
 1. Map each feature group from the app spec to a feature spec.
-2. For each feature group, create a feature spec at `specs/features/<feature-name>.md` using `.claude/skills/brd/templates/feature_spec.md`.
+2. For each feature group, create a feature spec at `specs/brd/features/<feature-name>.md` using `.claude/skills/brd/templates/feature_spec.md`.
 3. Each feature spec inherits context from the app spec (tech stack, schema, API endpoints).
 4. Present the feature list to the human:
    - Which features to implement first (Phase 1 of the app spec)
@@ -166,8 +166,8 @@ If Step 0 was performed, present relevant findings:
 
 ### B3. Draft Feature Spec
 
-1. Read existing specs in `specs/features/` to avoid conflicts.
-2. Read `specs/app_spec.md` if it exists — inherit tech stack, schema, and conventions.
+1. Read existing specs in `specs/brd/features/` to avoid conflicts.
+2. Read `specs/brd/app_spec.md` if it exists — inherit tech stack, schema, and conventions.
 3. Read `.claude/architecture.md` to understand the layer model.
 4. Use `.claude/skills/brd/templates/feature_spec.md` as the template.
 5. Fill in every section based on the interview answers.
@@ -180,7 +180,7 @@ If Step 0 was performed, present relevant findings:
    - Business Rules + Edge Cases — confirm behavior at boundaries
    - Wireframes — confirm the UI shape
    - Acceptance Criteria — confirm what "done" means
-10. Incorporate feedback, write final spec to `specs/features/<feature-name>.md`.
+10. Incorporate feedback, write final spec to `specs/brd/features/<feature-name>.md`.
 
 ---
 
@@ -292,6 +292,6 @@ Before delivering any spec, verify:
 
 ## Output
 
-- **Greenfield**: An app spec at `specs/app_spec.md` + feature specs at `specs/features/*.md`
-- **Single feature**: A feature spec at `specs/features/<feature-name>.md`
+- **Greenfield**: An app spec at `specs/brd/app_spec.md` + feature specs at `specs/brd/features/*.md`
+- **Single feature**: A feature spec at `specs/brd/features/<feature-name>.md`
 - All specs are ready for `/spec` to decompose into epics, stories, and dependency graphs.

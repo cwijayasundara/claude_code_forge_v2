@@ -44,14 +44,14 @@ Inspired by best practices from kaosensei/prd-generator and cdeust/ai-prd-genera
 5. **Draft spec** using templates from `.claude/skills/brd/templates/`.
 6. **Engineer self-audit** — verify zero unanswered questions before presenting.
 7. **Present draft** section by section for human approval.
-8. **Write approved specs** to `specs/`.
+8. **Write approved specs** to `specs/brd/`.
 
 ## Agent Spawning
 
 Spawn a single agent:
 
 ```
-Agent: brd-creator → analyzes codebase, conducts interview, writes to specs/
+Agent: brd-creator → analyzes codebase, conducts interview, writes to specs/brd/
 ```
 
 ### Prompt Template
@@ -63,18 +63,19 @@ The user wants to create a BRD. [Include user's initial idea if provided.]
 
 Follow the five-dimension interview process. For existing projects, analyze the codebase first.
 Use templates in `.claude/skills/brd/templates/`. Run the engineer self-audit before presenting.
-Write approved output to `specs/`.
+Write approved output to `specs/brd/`.
 ```
 
 ## Output
 
 ```
 specs/
-├── app_spec.md                    # Greenfield only — full application spec
-└── features/
-    ├── <feature-1>.md             # Feature spec per domain group
-    ├── <feature-2>.md
-    └── ...
+└── brd/
+    ├── app_spec.md                # Greenfield only — full application spec
+    └── features/
+        ├── <feature-1>.md         # Feature spec per domain group
+        ├── <feature-2>.md
+        └── ...
 ```
 
 ## Gate
@@ -97,8 +98,8 @@ The `/brd` skill produces the input that `/spec` consumes:
 
 | `/brd` output | `/spec` input |
 |----------------|---------------|
-| `specs/app_spec.md` | Read for context (tech stack, schema, conventions) |
-| `specs/features/*.md` | Decomposed into epics, stories, dependency graph |
+| `specs/brd/app_spec.md` | Read for context (tech stack, schema, conventions) |
+| `specs/brd/features/*.md` | Decomposed into epics, stories, dependency graph |
 
 The `/build` pipeline can invoke `/brd` as Phase 0 when no BRD exists:
 
