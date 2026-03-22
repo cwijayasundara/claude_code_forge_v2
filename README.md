@@ -13,34 +13,92 @@ Inspired by [Karpathy's autoresearch](https://github.com/karpathy/autoresearch) 
 - Node.js 20+ with npm
 - Docker and Docker Compose (for local deployment and E2E tests)
 
-## Installation
+## Installation (Local Claude Code Plugin)
 
-### Option A: Local Plugin (Recommended)
-
-Clone the forge once, use it across all your projects:
+### Step 1: Clone the Forge (Once)
 
 ```bash
-# 1. Clone the forge (once, shared across projects)
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git ~/claude-code-forge
+```
 
-# 2. Create your project
+This is your shared forge installation. You only clone it once and reuse it across all projects.
+
+### Step 2: Create Your Project
+
+```bash
 mkdir my-project && cd my-project
 git init
+```
 
-# 3. Load the forge as a plugin
+### Step 3: Load the Forge as a Plugin
+
+```bash
 claude --plugin-dir ~/claude-code-forge/.claude
+```
 
-# 4. Inside the Claude session, scaffold your project
+This starts Claude Code with the forge loaded as a temporary plugin. All forge commands appear with the `claude-code-forge:` namespace prefix.
+
+### Step 4: Scaffold Your Project
+
+Inside the Claude session, run:
+
+```
 > /claude-code-forge:scaffold
+```
 
-# 5. Exit and restart without --plugin-dir
+This copies the full SDLC toolkit into your project:
+
+| What gets copied | Destination | Contents |
+|-----------------|-------------|----------|
+| 8 agent definitions | `.claude/agents/` | brd-creator, spec-writer, architect, ui-designer, implementer, code-reviewer, security-reviewer, test-engineer |
+| 18 skills (12 task + 6 reference) | `.claude/skills/` | All pipeline commands + reference materials with templates |
+| 11 enforcement hooks | `.claude/hooks/` | Security (3), quality (5), gates (3) |
+| Code reviewer evals | `.claude/evals/` | 4 violation samples + expected findings |
+| Configuration | `.claude/` | settings.json, architecture.md, program.md |
+| State files | `.claude/state/` | iteration-log.md, learned-rules.md, failures.md, coverage-baseline.txt |
+| Output directories | `specs/` | brd/, stories/, design/mockups/, test_artefacts/, reviews/, state/ |
+| Project docs | root | CLAUDE.md, design.md |
+
+### Step 5: Exit and Restart Without the Plugin
+
+```
 > /exit
 claude
 ```
 
-After scaffolding, the project is **self-contained** — all agents, skills, hooks, and templates live in the project's `.claude/` directory. Team members just run `claude` in the project root.
+Your project is now **self-contained**. The `.claude/` directory has everything. No `--plugin-dir` needed again.
 
-### Option B: Manual Copy
+Team members who clone your repo later just run `claude` in the project root — the scaffold is already there.
+
+### Step 6: Start Building
+
+```bash
+# Create a BRD via Socratic interview
+> /brd
+
+# Or run the full pipeline
+> /build specs/brd/app_spec.md
+```
+
+### Updating the Forge
+
+To get the latest forge updates in an existing project:
+
+```bash
+# Pull latest forge
+cd ~/claude-code-forge && git pull
+
+# Re-scaffold (in your project)
+cd ~/my-project
+claude --plugin-dir ~/claude-code-forge/.claude
+> /claude-code-forge:scaffold
+```
+
+The scaffold command will overwrite agents, skills, hooks, and templates but will **not** touch your `specs/` output files, source code, or state files.
+
+### Alternative: Manual Copy (No Plugin)
+
+If you prefer not to use the plugin mechanism:
 
 ```bash
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
@@ -52,7 +110,7 @@ mkdir -p specs/{brd/features,stories,design/mockups,test_artefacts,reviews,state
 claude
 ```
 
-### Option C: Use This Repo Directly
+### Alternative: Use This Repo Directly
 
 ```bash
 git clone https://github.com/cwijayasundara/claude_code_forge_v2.git
