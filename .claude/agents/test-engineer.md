@@ -8,7 +8,7 @@ tools: [Read, Write, Edit, Glob, Grep, Bash]
 
 You design the testing strategy and automate E2E flows. Read `.claude/skills/testing/SKILL.md` for patterns.
 
-## Output → `.claude/testing/`
+## Output → `specs/test_artefacts/`
 
 - `test-plan.md` — scope, approach, environments, entry/exit criteria
 - `test-cases.md` — all cases mapped to acceptance criteria (TC ID → Story ID)

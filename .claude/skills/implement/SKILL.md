@@ -19,20 +19,20 @@ agent: implementer
 
 ## Prerequisites
 
-- `.claude/specs/` must exist (run `/spec` first)
-- `.claude/architecture/` must exist (run `/design` first)
+- `specs/stories/` must exist (run `/spec` first)
+- `specs/design/` must exist (run `/design` first)
 
 ## Steps
 
 1. Read `.claude/skills/code-gen/SKILL.md` for quality principles.
-2. Read `.claude/specs/dependency-graph.md` for parallel groups.
+2. Read `specs/stories/dependency-graph.md` for parallel groups.
 3. For each group in dependency order:
    a. **Multiple independent stories →** Create an agent team (one teammate per story).
    b. **Single story →** Implement inline with `implementer` agent.
    c. Require plan approval — verify no file conflicts between teammates.
    d. After teammates finish: run full test suite, lint, typecheck.
    e. Verify coverage ≥ 100% meaningful paths (BLOCK if not met).
-   f. Spawn `code-reviewer` — report to `.claude/reviews/code-review-group-[X].md`.
+   f. Spawn `code-reviewer` — report to `specs/reviews/code-review-group-[X].md`.
    g. Fix BLOCK findings (max 3 retries).
 4. Create Alembic migrations if data models changed.
 5. Update story files with implementation status.

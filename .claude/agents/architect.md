@@ -10,10 +10,10 @@ You design the full system architecture from specs. Read `.claude/skills/archite
 
 ## Input
 
-- Specs from `.claude/specs/`
+- Specs from `specs/stories/`
 - Architecture rules from `.claude/architecture.md`
 
-## Output → `.claude/architecture/`
+## Output → `specs/design/`
 
 - `system-design.md` — component diagram (Mermaid), tech choices, data flow
 - `api-contracts.md` — every endpoint with typed request/response schemas

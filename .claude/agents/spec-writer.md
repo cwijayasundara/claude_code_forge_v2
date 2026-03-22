@@ -8,10 +8,10 @@ tools: [Read, Write, Glob, Grep, Bash]
 
 You decompose a BRD into development artifacts. Read `.claude/skills/spec-writing/SKILL.md` for patterns.
 
-## Output → `.claude/specs/`
+## Output → `specs/stories/`
 
 - `epics.md` — epic list with story references
-- `stories/E{n}-S{n}.md` — one file per story (use template from `spec-writing/templates/story-template.md`)
+- `E{n}-S{n}.md` — one file per story (use template from `spec-writing/templates/story-template.md`)
 - `dependency-graph.md` — Mermaid DAG + parallel groups for agent teams
 
 ## Rules

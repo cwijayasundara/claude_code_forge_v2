@@ -20,8 +20,8 @@ context: fork
 This skill orchestrates TWO agents concurrently. Use the `Agent` tool to spawn both in the same message:
 
 ```
-Agent 1: code-reviewer     → quality, architecture, coverage → .claude/reviews/code-review.md
-Agent 2: security-reviewer → injection, auth, secrets        → .claude/reviews/security-review.md
+Agent 1: code-reviewer     → quality, architecture, coverage → specs/reviews/code-review.md
+Agent 2: security-reviewer → injection, auth, secrets        → specs/reviews/security-review.md
 ```
 
 Both agents read the same changed files but write to separate review files — no conflicts.
@@ -29,12 +29,12 @@ Both agents read the same changed files but write to separate review files — n
 ## Steps
 
 1. **Spawn both agents concurrently using the Agent tool** (two Agent calls in one message):
-   - Agent 1 (`code-reviewer`): "Read `.claude/skills/code-gen/SKILL.md`. Read `.claude/state/learned-rules.md`. Review changed files in `backend/` and `frontend/`. Write report to `.claude/reviews/code-review.md`."
-   - Agent 2 (`security-reviewer`): "Review changed files for security vulnerabilities. Write report to `.claude/reviews/security-review.md`."
+   - Agent 1 (`code-reviewer`): "Read `.claude/skills/code-gen/SKILL.md`. Read `specs/state/learned-rules.md`. Review changed files in `backend/` and `frontend/`. Write report to `specs/reviews/code-review.md`."
+   - Agent 2 (`security-reviewer`): "Review changed files for security vulnerabilities. Write report to `specs/reviews/security-review.md`."
 2. **After both complete** — check architecture compliance (no upward imports).
 3. Run full verification: `uv run pytest -x -q`, `uv run ruff check .`, `uv run mypy src/`.
-4. Both reviewers write reports to `.claude/reviews/`.
-5. If code-reviewer found BLOCK findings, **append to `.claude/state/failures.md`** with error details for the failure-driven learning loop.
+4. Both reviewers write reports to `specs/reviews/`.
+5. If code-reviewer found BLOCK findings, **append to `specs/state/failures.md`** with error details for the failure-driven learning loop.
 
 ## Review Checklist
 
@@ -52,7 +52,7 @@ Both agents read the same changed files but write to separate review files — n
 
 ## Output
 
-Reports go to `.claude/reviews/code-review.md` and `.claude/reviews/security-review.md`.
+Reports go to `specs/reviews/code-review.md` and `specs/reviews/security-review.md`.
 
 ## Gotchas
 

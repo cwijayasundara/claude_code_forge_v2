@@ -1,6 +1,6 @@
 ---
 name: spec-writing
-description: Decompose a Business Requirements Document into epics and user stories with acceptance criteria, estimate effort, and identify hard dependencies for parallel execution. Output stories in `.claude/specs/` with dependency-graph.md and story files.
+description: Decompose a Business Requirements Document into epics and user stories with acceptance criteria, estimate effort, and identify hard dependencies for parallel execution. Output stories in `specs/stories/` with dependency-graph.md and story files.
 ---
 
 # Spec Writing Skill

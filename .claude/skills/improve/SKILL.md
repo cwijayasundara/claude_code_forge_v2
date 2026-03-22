@@ -19,8 +19,8 @@ context: fork
 ## Steps
 
 1. **Write or locate the story.**
-   - If no story exists: write one with acceptance criteria → append to `.claude/specs/stories/`.
-   - If story exists: read acceptance criteria from `.claude/specs/stories/`.
+   - If no story exists: write one with acceptance criteria → append to `specs/stories/`.
+   - If story exists: read acceptance criteria from `specs/stories/`.
    - Every improvement needs a story. No story → no code.
 
 2. **Assess impact** — identify which layers are affected:

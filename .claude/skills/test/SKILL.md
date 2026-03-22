@@ -19,7 +19,7 @@ agent: test-engineer
 
 ## Prerequisites
 
-- `.claude/specs/` must exist
+- `specs/stories/` must exist
 - Source code in `backend/` and `frontend/` must exist (run `/implement` first)
 - Docker Compose stack must be deployable (run `/deploy` first for E2E)
 
@@ -28,7 +28,7 @@ agent: test-engineer
 1. Read `.claude/skills/testing/SKILL.md` for test patterns.
 2. Read `.claude/skills/testing/references/playwright.md` for Playwright patterns.
 3. Spawn `test-engineer` agent.
-4. Agent generates to `.claude/testing/`:
+4. Agent generates to `specs/test_artefacts/`:
    - `test-plan.md` — strategy, scope, environments
    - `test-cases.md` — all cases mapped to acceptance criteria
    - `test-data/` — realistic fixtures (JSON/PDF)

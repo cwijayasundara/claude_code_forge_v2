@@ -27,7 +27,7 @@
 ```bash
 git checkout -b feat/<feature-name>
 git add backend/ frontend/ docker-compose.yml .env.example .github/
-git add .claude/specs/ .claude/architecture/ .claude/design/ .claude/testing/ .claude/reviews/
+git add specs/
 git commit -m "feat: <description from BRD>"
 git push -u origin feat/<feature-name>
 gh pr create --title "feat: <description>" --body "<summary>"

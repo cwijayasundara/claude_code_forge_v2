@@ -19,9 +19,9 @@ agent: spec-writer
 
 1. Read `.claude/skills/spec-writing/SKILL.md` for decomposition patterns.
 2. Spawn `spec-writer` agent with the BRD as input.
-3. Agent writes output to `.claude/specs/`:
+3. Agent writes output to `specs/stories/`:
    - `epics.md` — epic summaries with story lists
-   - `stories/E{n}-S{n}.md` — individual story files with acceptance criteria
+   - `E{n}-S{n}.md` — individual story files with acceptance criteria
    - `dependency-graph.md` — hard dependencies + parallel groups
 4. Verify gate: every story has acceptance criteria, layer assignment, and group.
 5. Present epic summary and dependency graph for user review.

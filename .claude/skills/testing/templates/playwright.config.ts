@@ -7,8 +7,8 @@ import { defineConfig, devices } from '@playwright/test';
  * The webServer block auto-starts Docker Compose if not already running.
  */
 export default defineConfig({
-  testDir: '.claude/testing/e2e/flows',
-  outputDir: '.claude/testing/e2e/results',
+  testDir: 'specs/test_artefacts/e2e/flows',
+  outputDir: 'specs/test_artefacts/e2e/results',
 
   /* Fail the build on CI if test.only was left in source */
   forbidOnly: !!process.env.CI,
@@ -21,7 +21,7 @@ export default defineConfig({
 
   /* Reporter */
   reporter: [
-    ['html', { outputFolder: '.claude/testing/e2e/report' }],
+    ['html', { outputFolder: 'specs/test_artefacts/e2e/report' }],
     ['list'],
   ],
 

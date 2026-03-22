@@ -1,6 +1,6 @@
 ---
 name: ui-mockup
-description: Create interactive UI mockups as self-contained HTML files using React 18 + Tailwind CSS (via CDN). Generate clickable prototypes with state management and realistic mock data. Output mockups to `.claude/design/mockups/`.
+description: Create interactive UI mockups as self-contained HTML files using React 18 + Tailwind CSS (via CDN). Generate clickable prototypes with state management and realistic mock data. Output mockups to `specs/design/mockups/`.
 ---
 
 # UI Mockup Skill

@@ -1,6 +1,6 @@
 # State File Schemas
 
-All state files live in `.claude/state/` and persist across iterations.
+All state files live in `specs/state/` and persist across iterations.
 
 ## iteration-log.md
 

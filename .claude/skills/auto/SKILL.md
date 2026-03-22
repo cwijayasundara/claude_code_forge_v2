@@ -19,8 +19,8 @@ Inspired by Karpathy's autoresearch ratcheting pattern and self-improving agent 
 
 ## Prerequisites
 
-- `.claude/specs/` approved by human (run `/spec` first)
-- `.claude/architecture/` approved by human (run `/design` first)
+- `specs/stories/` approved by human (run `/spec` first)
+- `specs/design/` approved by human (run `/design` first)
 - `.claude/program.md` exists with instructions + constraints + stopping criteria
 
 ## Agent Delegation
@@ -42,7 +42,7 @@ Read program.md → Pick next story → Implement → Test → Review → Keep/R
 ### For each iteration:
 
 1. **Read `.claude/program.md`** — check instructions, constraints, stopping criteria.
-2. **Read `.claude/state/learned-rules.md`** — inject lessons into the implementer's prompt.
+2. **Read `specs/state/learned-rules.md`** — inject lessons into the implementer's prompt.
 3. **Pick the next story** from dependency graph (respect group ordering).
 4. **Record coverage baseline** before implementation:
    ```bash
@@ -51,7 +51,7 @@ Read program.md → Pick next story → Implement → Test → Review → Keep/R
 5. **Spawn `implementer` agent** via Agent tool with this prompt:
    ```
    Implement story [ID]. Read `.claude/skills/code-gen/SKILL.md` for quality principles.
-   Read `.claude/state/learned-rules.md` — do NOT repeat these past mistakes: [paste rules].
+   Read `specs/state/learned-rules.md` — do NOT repeat these past mistakes: [paste rules].
    Write code to backend/ and frontend/. Write tests. Run verification.
    ```
 6. **Ratchet gate** — run the full verification:
@@ -66,7 +66,7 @@ Read program.md → Pick next story → Implement → Test → Review → Keep/R
    # If coverage-after < coverage-before → FAIL
    ```
 8. **Decision:**
-   - **PASS** → `git commit`, append to `.claude/state/iteration-log.md`, move to next story.
+   - **PASS** → `git commit`, append to `specs/state/iteration-log.md`, move to next story.
    - **FAIL** → enter **self-healing loop** (see below).
 9. **Update `.claude/program.md`** Current Focus section with current story and iteration count.
 10. **Check stopping criteria** — if met, stop and report to human.
@@ -111,8 +111,8 @@ Diagnose error → Classify category → Apply minimal fix → Re-run gate → P
 
 After 3 failed fix attempts on the same error:
 1. `git checkout -- .` (revert all changes for this story)
-2. Append full failure details to `.claude/state/failures.md`
-3. Extract a defensive rule to `.claude/state/learned-rules.md`
+2. Append full failure details to `specs/state/failures.md`
+3. Extract a defensive rule to `specs/state/learned-rules.md`
 4. Escalate to human by updating `program.md` with `BLOCKED: [story-id] — [reason]`
 
 ---
@@ -121,7 +121,7 @@ After 3 failed fix attempts on the same error:
 
 ### When to extract a rule
 
-Extract a defensive rule into `.claude/state/learned-rules.md` when:
+Extract a defensive rule into `specs/state/learned-rules.md` when:
 - The **same error type** appears 2+ times in `failures.md` (pattern detected)
 - A self-healing fix succeeds after a failure (capture what worked)
 - A story is BLOCKED after 3 retries (capture what to avoid)
@@ -175,7 +175,7 @@ Project failures → learned-rules.md (project) → Gotchas in SKILL.md (scaffol
 
 ## State Files
 
-All in `.claude/state/` — persistent across iterations:
+All in `specs/state/` — persistent across iterations:
 
 - `iteration-log.md` — every iteration: story, action, result, duration, coverage, commit
 - `learned-rules.md` — defensive rules extracted from failures (injected into future prompts)

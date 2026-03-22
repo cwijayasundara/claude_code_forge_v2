@@ -31,7 +31,7 @@ For test case templates, see [examples/test-case-template.md](examples/test-case
 ## Output Structure
 
 ```
-.claude/testing/
+specs/test_artefacts/
 ├── test-plan.md              # Overall test strategy
 ├── test-cases.md             # All test cases with expected results
 ├── test-data/

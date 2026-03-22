@@ -99,12 +99,12 @@ Skills fall into two categories:
 | Agent | Role | Output |
 |-------|------|--------|
 | brd-creator | Socratic interview → app spec + feature specs | `specs/brd/` |
-| spec-writer | BRD → epics + stories | `.claude/specs/` |
-| architect | System design, APIs, data models, deployment | `.claude/architecture/` |
-| ui-designer | Interactive HTML/React mockups | `.claude/design/` |
+| spec-writer | BRD → epics + stories | `specs/stories/` |
+| architect | System design, APIs, data models, deployment | `specs/design/` |
+| ui-designer | Interactive HTML/React mockups | `specs/design/mockups/` |
 | implementer | Story-driven code + unit tests (agent teams for parallel) | `backend/`, `frontend/` |
 | code-reviewer | Quality principles, architecture compliance, test coverage | Review findings |
-| test-engineer | Test plan, cases, Playwright E2E | `.claude/testing/` |
+| test-engineer | Test plan, cases, Playwright E2E | `specs/test_artefacts/` |
 | security-reviewer | Security audit + vulnerability scanning | Review findings |
 
 ### Key Principles
@@ -160,9 +160,9 @@ Human approves specs + design → /auto takes over → Implement → Test → Ke
 
 - `.claude/program.md` — Human-agent bridge. The human edits instructions/constraints/stopping criteria. The agent reads it every iteration.
 - `.claude/skills/auto/SKILL.md` — The autonomous ratcheting loop (inspired by Karpathy's autoresearch).
-- `.claude/state/iteration-log.md` — Every iteration: story, action, result, duration, coverage, commit.
-- `.claude/state/learned-rules.md` — Defensive rules extracted from failures. Grows monotonically — never deleted. Injected into agent prompt each iteration.
-- `.claude/state/failures.md` — Raw failure details for pattern extraction.
+- `specs/state/iteration-log.md` — Every iteration: story, action, result, duration, coverage, commit.
+- `specs/state/learned-rules.md` — Defensive rules extracted from failures. Grows monotonically — never deleted. Injected into agent prompt each iteration.
+- `specs/state/failures.md` — Raw failure details for pattern extraction.
 
 **Ratcheting rules:** Only improvements persist. Failed iterations revert completely. Coverage never drops. Tests never break. Lessons accumulate.
 

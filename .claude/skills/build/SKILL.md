@@ -18,12 +18,12 @@ context: fork
 
 | Phase | Agent | Input | Output | Gate |
 |-------|-------|-------|--------|------|
-| 1. Spec | `spec-writer` | BRD | `.claude/specs/` | All stories have acceptance criteria |
-| 2. Architecture | `architect` | specs | `.claude/architecture/` | Typed schemas, folders, migrations |
-| 3. UI Design | `ui-designer` | specs + arch | `.claude/design/` | Every UI story has a mockup |
+| 1. Spec | `spec-writer` | BRD | `specs/stories/` | All stories have acceptance criteria |
+| 2. Architecture | `architect` | specs | `specs/design/` | Typed schemas, folders, migrations |
+| 3. UI Design | `ui-designer` | specs + arch | `specs/design/mockups/` | Every UI story has a mockup |
 | 4. Implementation | `implementer` + agent team | specs + arch + design | `backend/`, `frontend/` | Tests pass, 100% coverage |
-| 5. Code Review | `code-reviewer` + `security-reviewer` | code | `.claude/reviews/` | Zero BLOCK findings |
-| 6. E2E Testing | `test-engineer` | specs + code | `.claude/testing/` | Playwright tests pass |
+| 5. Code Review | `code-reviewer` + `security-reviewer` | code | `specs/reviews/` | Zero BLOCK findings |
+| 6. E2E Testing | `test-engineer` | specs + code | `specs/test_artefacts/` | Playwright tests pass |
 | 7. Deployment | `architect` | arch + code | `docker-compose.yml`, CI | `docker compose up` healthy |
 | 8. Commit & PR | — | all changes | PR URL | CI passes |
 
@@ -42,7 +42,7 @@ run autonomously via the `/auto` ratcheting loop. The `/build` orchestrator:
 ### Integration with /auto
 
 After human approval of specs + design:
-1. Initialize `.claude/state/` files (iteration-log, learned-rules, failures).
+1. Initialize `specs/state/` files (iteration-log, learned-rules, failures).
 2. Update `.claude/program.md` Current Focus with story count and starting status.
 3. Invoke `/auto` — the autonomous loop handles implementation, review, testing, and deployment.
 4. `/auto` stops when all stories pass OR a stopping criterion is hit.
@@ -52,7 +52,7 @@ After human approval of specs + design:
 
 - Coverage never drops below previous commit's level.
 - Tests never break — failed iterations revert completely.
-- Lessons accumulate in `.claude/state/learned-rules.md` — never deleted.
+- Lessons accumulate in `specs/state/learned-rules.md` — never deleted.
 - Max 3 retries per story before escalating to human.
 
 ## Gotchas

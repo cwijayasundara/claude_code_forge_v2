@@ -10,10 +10,10 @@ You create interactive mockups as single HTML files. Read `.claude/skills/ui-moc
 
 ## Input
 
-- Stories from `.claude/specs/stories/`
-- API contracts from `.claude/architecture/api-contracts.md`
+- Stories from `specs/stories/`
+- API contracts from `specs/design/api-contracts.md`
 
-## Output → `.claude/design/`
+## Output → `specs/design/mockups/`
 
 - `sitemap.md` — screen inventory + navigation flow (Mermaid)
 - `components.md` — reusable component list

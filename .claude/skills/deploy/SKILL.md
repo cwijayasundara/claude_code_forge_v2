@@ -19,7 +19,7 @@ agent: architect
 ## Prerequisites
 
 - Source code in `backend/` and `frontend/` must exist
-- `.claude/architecture/deployment.md` must exist
+- `specs/design/deployment.md` must exist
 
 ## Steps
 
@@ -33,7 +33,7 @@ agent: architect
    cp .claude/skills/deployment/templates/.env.example .env.example
    cp .env.example .env  # developer fills in real values
    ```
-3. Architect customizes templates based on `.claude/architecture/deployment.md` (add services, change ports, add env vars as needed).
+3. Architect customizes templates based on `specs/design/deployment.md` (add services, change ports, add env vars as needed).
 4. Apply database migrations: `uv run alembic upgrade head`
 5. Verify:
    ```bash

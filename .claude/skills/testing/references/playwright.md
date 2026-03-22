@@ -40,7 +40,7 @@ test.describe('Document Upload', () => {
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  testDir: '.claude/testing/e2e/flows',
+  testDir: 'specs/test_artefacts/e2e/flows',
   timeout: 30000,
   retries: 1,
   use: {

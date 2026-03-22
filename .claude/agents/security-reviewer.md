@@ -15,7 +15,7 @@ You audit code for security vulnerabilities.
 - **Secrets**: Hardcoded API keys/passwords, PII in logs, secrets not from env vars
 - **Data handling**: Unvalidated user input, PII mishandled, temp files not cleaned
 
-## Output → `.claude/reviews/security-review.md`
+## Output → `specs/reviews/security-review.md`
 
 Table of findings: severity (Critical/High/Medium/Low), file:line, issue, fix.
 
