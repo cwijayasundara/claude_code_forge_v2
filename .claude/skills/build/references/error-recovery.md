@@ -26,8 +26,8 @@
 
 ```bash
 git checkout -b feat/<feature-name>
-git add backend/ frontend/ docker-compose.yml .env.example .github/
-git add specs/
+git add backend/ frontend/ specs/
+git add docker-compose.yml .env.example .github/
 git commit -m "feat: <description from BRD>"
 git push -u origin feat/<feature-name>
 gh pr create --title "feat: <description>" --body "<summary>"

@@ -4,17 +4,17 @@
 
 | # | Severity | Violation | Line |
 |---|----------|-----------|------|
-| 1 | BLOCK | Upward import: service imports from api (`from "../../api/routes"`) | 7 |
+| 1 | BLOCK | Upward import: service imports from api (`from "../../api/routes"`) | 6 |
 | 2 | BLOCK | API-layer object (`uploadRouter`) stored as service class property | 12 |
 
 ## bad-long-function.ts
 
 | # | Severity | Violation | Line |
 |---|----------|-----------|------|
-| 1 | BLOCK | Function `processDocument` exceeds 50 lines (~80 lines) | 11 |
-| 2 | BLOCK | Hardcoded API key (`sk-ant-api03-...`) | 9 |
-| 3 | BLOCK | Bare `catch (e)` with no typed error handling | 82 |
-| 4 | WARN | String-matching field extraction instead of LLM pipeline | 60-68 |
+| 1 | BLOCK | Function `processDocument` exceeds 50 lines (~80 lines) | 10 |
+| 2 | BLOCK | Hardcoded API key (`sk-ant-api03-...`) | 8 |
+| 3 | BLOCK | Bare `catch (e)` with no typed error handling | 81 |
+| 4 | WARN | String-matching field extraction instead of LLM pipeline | 58-63 |
 
 ## bad-test-quality.ts
 

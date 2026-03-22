@@ -7,7 +7,7 @@ should catch ALL violations listed in the corresponding `expected.md`.
 
 ```bash
 # 1. Copy a sample into src/ temporarily
-cp .claude/evals/samples/bad-upward-import.py src/service/temp_eval.py
+cp .claude/evals/samples/bad-upward-import.ts src/service/temp_eval.ts
 
 # 2. Run the code-reviewer agent on it
 # (via /review or manual agent spawn)
@@ -15,7 +15,7 @@ cp .claude/evals/samples/bad-upward-import.py src/service/temp_eval.py
 # 3. Compare its findings against expected.md
 
 # 4. Clean up
-rm src/service/temp_eval.py
+rm src/service/temp_eval.ts
 ```
 
 ## Scoring

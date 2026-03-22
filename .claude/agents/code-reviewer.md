@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Reviews code for quality, architecture compliance, test coverage, and story traceability.
-tools: [Read, Grep, Glob, Bash]
+tools: [Read, Write, Edit, Grep, Glob, Bash]
 ---
 
 # Code Reviewer

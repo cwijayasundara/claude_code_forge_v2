@@ -62,7 +62,7 @@ export default defineConfig({
       stderr: 'pipe',
     },
     {
-      command: '',         // frontend started by docker compose above
+      command: 'npm run dev',
       url: 'http://localhost:3000',
       reuseExistingServer: true,
       timeout: 60000,

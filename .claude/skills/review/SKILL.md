@@ -54,6 +54,8 @@ Both agents read the same changed files but write to separate review files — n
 
 Reports go to `specs/reviews/code-review.md` and `specs/reviews/security-review.md`.
 
+Note: During `/implement`, per-group reviews are written to `specs/reviews/code-review-group-[X].md`. The `/review` skill produces the final consolidated review.
+
 ## Gotchas
 
 - **Guessing instead of running checks.** Always execute `grep`, `pytest`, `mypy` — never assume code is compliant.

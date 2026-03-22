@@ -34,11 +34,12 @@ backend/
 │   │       ├── __init__.py
 │   │       └── orders.py           # POST /orders, GET /orders/{id}
 │   │
-│   └── utils/
+│   └── logging/
 │       ├── __init__.py
 │       └── logger.py               # Structured logging
 │
 ├── tests/
+│   ├── conftest.py                 # Shared fixtures
 │   ├── types/
 │   │   └── test_order.py
 │   ├── service/
@@ -73,29 +74,25 @@ frontend/
 │   │
 │   ├── service/                    # Layer 3: Business logic (api clients)
 │   │   ├── index.ts
-│   │   └── orders.ts               # submitOrder(), getOrder(), listOrders(), etc.
+│   │   ├── orders.ts               # submitOrder(), getOrder(), listOrders(), etc.
+│   │   └── orders.test.ts          # Tests co-located with source
 │   │
 │   ├── ui/                         # Layer 4: React components
 │   │   ├── App.tsx
 │   │   ├── pages/
 │   │   │   ├── OrderForm.tsx       # Create/edit order page
-│   │   │   └── OrderList.tsx       # Order list page
+│   │   │   ├── OrderForm.test.tsx  # Co-located test
+│   │   │   ├── OrderList.tsx       # Order list page
+│   │   │   └── OrderList.test.tsx  # Co-located test
 │   │   ├── components/
 │   │   │   ├── OrderCard.tsx       # Order display
 │   │   │   ├── StatusBadge.tsx     # Status indicator
 │   │   │   └── ErrorMessage.tsx
 │   │   └── hooks/
-│   │       └── useOrders.ts        # Custom hook for order list
+│   │       ├── useOrders.ts        # Custom hook for order list
+│   │       └── useOrders.test.ts   # Co-located test
 │   │
-│   ├── App.tsx                     # Root component
 │   └── index.css                   # Global styles
-│
-├── tests/                          # All .test.tsx files live alongside source
-│   ├── service/
-│   │   └── orders.test.ts
-│   └── ui/
-│       ├── OrderForm.test.tsx
-│       └── OrderList.test.tsx
 │
 ├── vite.config.ts
 ├── tsconfig.json
@@ -110,34 +107,37 @@ frontend/
 /
 ├── backend/                        # Python FastAPI backend
 ├── frontend/                       # TypeScript React frontend
-├── .claude/                        # Specs, architecture, design, reviews
-│   ├── specs/
-│   │   ├── brd-analysis.md
+├── specs/                          # All specification and pipeline outputs
+│   ├── brd/                        # BRD output
+│   │   └── brd-analysis.md
+│   ├── stories/                    # Epics, stories, dependency graph
 │   │   ├── epics.md
-│   │   ├── stories/
-│   │   │   ├── E1-S1-types.md
-│   │   │   └── E2-S1-upload.md
-│   │   └── dependency-graph.md
-│   ├── architecture/
-│   │   ├── design.md               # System design decisions
-│   │   ├── references/
-│   │   │   └── api-patterns.md
-│   │   └── templates/
-│   │       └── folder-structure.md
-│   ├── design/
-│   │   ├── sitemap.md
-│   │   ├── mockups/
-│   │   │   └── upload-flow.html
-│   │   └── components.md
-│   ├── testing/
+│   │   ├── dependency-graph.md
+│   │   ├── E1-S1-types.md
+│   │   └── E2-S1-upload.md
+│   ├── design/                     # Architecture docs
+│   │   ├── system-design.md        # System design decisions
+│   │   ├── api-contracts.md        # Typed API contracts
+│   │   ├── data-models.md          # Pydantic models, DB schema
+│   │   ├── folder-structure.md     # File layout per layer
+│   │   ├── deployment.md           # Docker Compose topology
+│   │   └── mockups/                # UI mockups (React + Tailwind HTML)
+│   │       └── upload-flow.html
+│   ├── test_artefacts/             # Test plan, cases, data, E2E
 │   │   ├── test-plan.md
-│   │   ├── e2e/flows/
-│   │   │   └── upload.spec.ts
-│   │   └── data/
-│   │       └── fixtures.json
-│   └── reviews/
-│       ├── code-review.md
-│       └── security-review.md
+│   │   ├── test-cases.md
+│   │   ├── test-data/
+│   │   │   └── fixtures.json
+│   │   └── e2e/
+│   │       └── flows/
+│   │           └── upload.spec.ts
+│   ├── reviews/                    # Code + security reviews
+│   │   ├── code-review.md
+│   │   └── security-review.md
+│   └── state/                      # Iteration log, learned rules, failures
+│       ├── iteration-log.md
+│       ├── learned-rules.md
+│       └── failures.md
 ├── fixtures/                       # Test data (never modified during tests)
 │   ├── orders/
 │   │   ├── order_001.json
@@ -155,7 +155,7 @@ frontend/
 - **Backend modules:** `lowercase_with_underscores.py`
 - **Backend tests:** `test_module_name.py`
 - **Frontend components:** `PascalCase.tsx`
-- **Frontend tests:** `Component.test.tsx` (same directory as source)
+- **Frontend tests:** `Component.test.tsx` (co-located next to source file)
 - **Enums and types:** Defined in `types/` layer, imported everywhere
 - **Database models:** In `types/` layer, mirrored as TypeScript interfaces
 - **API routes:** One file per resource, e.g., `routes/orders.py`

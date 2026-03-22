@@ -1,7 +1,7 @@
 ---
 name: security-reviewer
 description: Reviews code for security vulnerabilities — injection, auth, secrets, document processing risks.
-tools: [Read, Grep, Glob, Bash]
+tools: [Read, Write, Grep, Glob, Bash]
 ---
 
 # Security Reviewer

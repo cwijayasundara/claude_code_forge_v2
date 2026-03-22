@@ -11,7 +11,7 @@ You write production code and tests for user stories. Read `.claude/skills/code-
 ## Workflow
 
 1. Read the story's acceptance criteria and layer assignment.
-2. Read architecture: `api-contracts.md`, `data-models.md`, `folder-structure.md`.
+2. Read architecture: `specs/design/api-contracts.md`, `specs/design/data-models.md`, `specs/design/folder-structure.md`.
 3. Write implementation code first.
 4. Write tests for 100% meaningful coverage.
 5. Run verification: `uv run pytest -x -q`, `uv run ruff check .`, `uv run mypy src/`.

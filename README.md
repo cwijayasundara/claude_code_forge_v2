@@ -40,13 +40,15 @@ The scaffold is already active — start writing your BRD and run `/build`.
 ## Quick Start
 
 ```bash
-# 1. Write a Business Requirements Document (plain text or markdown)
+# 1. Create a Business Requirements Document via guided interview
+/brd
 
 # 2. Run the full pipeline
-/build docs/my-brd.md
+/build specs/brd/brd.md
 
 # Or run phases individually:
-/spec docs/my-brd.md    # Decompose BRD into epics and stories
+/brd                     # Socratic interview → BRD
+/spec specs/brd/brd.md   # Decompose BRD into epics and stories
 /design                  # Generate architecture + UI mockups
 # ← Review and approve specs + design here
 /auto                    # Autonomous loop builds everything
@@ -65,14 +67,15 @@ The scaffold has three operating modes:
 ## Pipeline
 
 ```
-/spec → /design → /implement → /review → /test → /deploy
-  │        │          │           │         │        │
-  │        │          │           │         │        └─ Docker Compose stack
-  │        │          │           │         └─ Playwright E2E + unit/integration
-  │        │          │           └─ Code review + security review gate
-  │        │          └─ Agent teams for parallel story execution
-  │        └─ Architect + UI designer (concurrent)
-  └─ BRD → epics, stories, dependency graph
+/brd → /spec → /design → /implement → /review → /test → /deploy
+  │      │        │          │           │         │        │
+  │      │        │          │           │         │        └─ Docker Compose stack
+  │      │        │          │           │         └─ Playwright E2E + unit/integration
+  │      │        │          │           └─ Code review + security review gate
+  │      │        │          └─ Agent teams for parallel story execution
+  │      │        └─ Architect + UI designer (concurrent)
+  │      └─ BRD → epics, stories, dependency graph
+  └─ Socratic interview → Business Requirements Document
 ```
 
 **`/build [BRD]`** runs all phases end-to-end. Phases 1-3 pause for human approval. Phase 4+ runs autonomously via `/auto`.
@@ -81,6 +84,7 @@ The scaffold has three operating modes:
 
 | Command | What it does | Agent(s) |
 |---------|-------------|----------|
+| `/brd` | Create BRD via Socratic interview | `specs/brd/` |
 | `/spec [BRD]` | Decompose BRD into epics, stories, dependency graph | spec-writer |
 | `/design` | System architecture + interactive UI mockups | architect + ui-designer |
 | `/implement` | Code generation with parallel agent teams | implementer |
@@ -109,7 +113,7 @@ Project-specific architecture (API contracts, data models, folder structure) is 
 
 ```
 .claude/
-├── agents/                    # 7 agent definitions (lean prompts, ~25 lines each)
+├── agents/                    # 8 agent definitions (lean prompts, ~25 lines each)
 │   ├── spec-writer.md
 │   ├── architect.md
 │   ├── ui-designer.md
@@ -132,7 +136,8 @@ Project-specific architecture (API contracts, data models, folder structure) is 
 │   ├── protect-pdfs.js        # BLOCKS writes to docs/ fixtures
 │   ├── pre-commit-gate.js     # BLOCKS commits with architecture violations
 │   └── task-completed.js      # Reminds to run /review
-├── skills/                    # 17 skills (11 task + 6 reference)
+├── skills/                    # 18 skills (12 task + 6 reference)
+│   ├── brd/                   # BRD creation via Socratic interview
 │   ├── build/SKILL.md         # Full pipeline orchestrator
 │   ├── spec/SKILL.md          # BRD decomposition
 │   ├── design/SKILL.md        # Architecture + UI (concurrent agents)

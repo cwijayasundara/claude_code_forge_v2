@@ -103,9 +103,9 @@ Skills fall into two categories:
 | architect | System design, APIs, data models, deployment | `specs/design/` |
 | ui-designer | Interactive HTML/React mockups | `specs/design/mockups/` |
 | implementer | Story-driven code + unit tests (agent teams for parallel) | `backend/`, `frontend/` |
-| code-reviewer | Quality principles, architecture compliance, test coverage | Review findings |
+| code-reviewer | Quality principles, architecture compliance, test coverage | `specs/reviews/` |
 | test-engineer | Test plan, cases, Playwright E2E | `specs/test_artefacts/` |
-| security-reviewer | Security audit + vulnerability scanning | Review findings |
+| security-reviewer | Security audit + vulnerability scanning | `specs/reviews/` |
 
 ### Key Principles
 

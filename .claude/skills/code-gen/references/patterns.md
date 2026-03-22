@@ -6,7 +6,7 @@
 # Types layer — Pydantic models
 from pydantic import BaseModel, Field
 from uuid import UUID
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 
 class OrderStatus(str, Enum):
@@ -20,7 +20,7 @@ class Order(BaseModel):
     customer_id: UUID
     status: OrderStatus = OrderStatus.PENDING
     total_amount: float
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 # Service layer — business logic, no HTTP awareness
 async def process_order(order: Order, payment_service: PaymentService) -> ProcessedOrder:
